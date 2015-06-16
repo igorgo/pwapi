@@ -20,8 +20,6 @@
           <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.2.2" />
           <element id="library" level="project" name="Gradle: org.expressme:JOpenId:1.08" />
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.1.1" />
-          <element id="library" level="project" name="Gradle: javax.servlet:jsp-api:2.0" />
-          <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:2.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">

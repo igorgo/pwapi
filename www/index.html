@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-action">
                     <!--<a id="excelhref" href='#modal1' class="modal-trigger">Увійти</a>-->
-                    <a id="excelhref" href='#modal1'>Увійти</a>
+                    <a id="excel8Reporting" class="meetingRef" href='#modal1'>Увійти</a>
                     <span class="right white-text">23 июня 2015 10:30</span>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     </ul>
                 </div>
                 <div class="card-action">
-                    <a href='#'>Увійти</a>
+                    <a href='fast8Reporting' class="meetingRef" href='#modal1'>Увійти</a>
                     <span class="right white-text">30 июля 2015 10:30</span>
                 </div>
             </div>
@@ -86,7 +86,7 @@
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
-  <form name="form1" method="GET" onsubmit="return checkform(this);" action="/pwebinar/pindex.jsp">
+  <form name="form1" method="GET" onsubmit="return checkform(this);" action="/parusapi/joinMeeting.jsp">
     <div class="modal-content">
       <h4>Приєднатися до вебінару</h4>
               <div class="row">
@@ -110,7 +110,8 @@
       </div>
     </div>
     <div class="modal-footer">
-<button class="btn waves-effect waves-light" type="submit" name="action">Приєднатися
+        <input id="meetingid" name="meetingid" type="hidden">
+<button id="joinBtn" class="btn waves-effect waves-light" type="submit">Приєднатися
     <i class="mdi-content-send right"></i>
   </button>
     </div>
@@ -128,15 +129,37 @@
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     //$('.modal-trigger').leanModal();
+      $("#joinBtn").on(
+              "click", function(e) {
+                  var isValid = $("#first_name")[0].value.length > 1;
+                  isValid = isValid && $("#last_name")[0].value.length > 1;
+                  isValid = isValid && $("#firm")[0].value.length > 1;
+                  if (!isValid) {
+                      e.preventDefault(); //prevent the default action
+                  }
+              });
+      $('.meetingRef').on(
+              "click",
+              function() {
+                  console.log("click")
+                  var id= $( this ).attr("id");
+                   $.get("parusapi/checkMeeting.jsp",
+                          { id:id },
+                          function(data){
+                              console.log("run: " + data.run);
+                              if (data.run=="true") {
+                                  console.log("true");
+                                  $('#meetingid').val(id);
+                                  $('#modal1').openModal();
+                              } else {
+                                  console.log("false");
+                                  $('#modal2').openModal();
+                              }
+                          }
+                  );
 
-      $('#excelhref')[0].onclick = function() {
-          d = 1;
-          if (d==1) {
-              $('#modal1').openModal();
-          } else {
-              $('#modal2').openModal();
-          }
-      } ;
+              }
+      );
   });
   $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
