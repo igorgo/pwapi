@@ -16,22 +16,17 @@
 * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 *
 */%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="javax.xml.transform.dom.DOMSource"%>
-<%@page import="javax.xml.transform.stream.StreamResult"%>
-<%@page import="javax.xml.transform.OutputKeys"%>
-<%@page import="javax.xml.transform.TransformerFactory"%>
-<%@page import="javax.xml.transform.Transformer"%>
+<%@page import="org.apache.commons.lang.StringEscapeUtils"%>
+<%@page import="org.w3c.dom.Document"%>
 <%@page import="org.w3c.dom.Element"%>
-<%@page import="com.sun.org.apache.xerces.internal.dom.ChildNode"%>
 <%@page import="org.w3c.dom.Node"%>
 <%@page import="org.w3c.dom.NodeList"%>
-<%@page import="java.util.*,java.io.*,java.net.*,javax.crypto.*,javax.xml.parsers.*,org.w3c.dom.Document,org.xml.sax.*" errorPage="error.jsp"%>
-
-<%@ page import="org.apache.commons.codec.digest.*"%>
-<%@ page import="java.io.*"%>
-<%@ page import="java.nio.channels.FileChannel"%>
-<%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
+<%@page import="org.xml.sax.InputSource"%>
+<%@page import="org.xml.sax.SAXException"%>
+<%@page import="javax.xml.parsers.DocumentBuilder"%>
+<%@page import="javax.xml.parsers.DocumentBuilderFactory"%>
+<%@page import="javax.xml.parsers.ParserConfigurationException"%>
+<%@page import="java.io.*,java.net.HttpURLConnection,java.net.URL,java.net.URLEncoder,java.text.SimpleDateFormat,java.util.*" errorPage="error.jsp"%>
 
 <%@ include file="bbb_api_conf.jsp"%>
 

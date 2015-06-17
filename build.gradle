@@ -23,13 +23,13 @@ repositories {
 }
 
 dependencies {
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
-    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2'
+    //compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
+    //compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2'
     compile group: 'commons-io', name: 'commons-io', version: '2.0'
     compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.5'
-    compile 'com.google.code.gson:gson:2.2.2'
+    //compile 'com.google.code.gson:gson:2.2.2'
 //    compile group: 'javax.servlet', name: 'jsp-api', version: '2.0'
 //    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
-    compile 'org.expressme:JOpenId:1.08'
+   // compile 'org.expressme:JOpenId:1.08'
 }

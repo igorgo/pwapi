@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-action">
                     <!--<a id="excelhref" href='#modal1' class="modal-trigger">Увійти</a>-->
-                    <a id="excel8Reporting" class="meetingRef" href='#modal1'>Увійти</a>
+                    <a id="excel8Reporting" class="meetingRef" href='#'>Увійти</a>
                     <span class="right white-text">23 июня 2015 10:30</span>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     </ul>
                 </div>
                 <div class="card-action">
-                    <a href='fast8Reporting' class="meetingRef" href='#modal1'>Увійти</a>
+                    <a id='fast8Reporting' href="#" class="meetingRef" href='#modal1'>Увійти</a>
                     <span class="right white-text">30 июля 2015 10:30</span>
                 </div>
             </div>
@@ -98,7 +98,7 @@
         <div class="input-field col s6">
           <i class="mdi-action-account-box prefix"></i>
           <input id="last_name" name="last_name" type="text" class="validate">
-          <label for="last_name">Призвище</label>
+          <label for="last_name">Прізвище</label>
         </div>
       </div>
       <div class="row">
@@ -141,18 +141,14 @@
       $('.meetingRef').on(
               "click",
               function() {
-                  console.log("click")
                   var id= $( this ).attr("id");
                    $.get("parusapi/checkMeeting.jsp",
                           { id:id },
                           function(data){
-                              console.log("run: " + data.run);
                               if (data.run=="true") {
-                                  console.log("true");
                                   $('#meetingid').val(id);
                                   $('#modal1').openModal();
                               } else {
-                                  console.log("false");
                                   $('#modal2').openModal();
                               }
                           }

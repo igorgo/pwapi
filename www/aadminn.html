@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <title>Парус-Україна Вебінари</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <style type="text/css">
+        body {
+            background-color: #fcfcfc;
+        }
+    </style>
+</head>
+<body>
+<h2 class="header">Управление вебинарами</h2>
+
+<div class="row">
+    <div class="row">
+        <div class="input-field col s6">
+            <input id="username" type="text" name="username" class="validate">
+            <label for="username">Полное имя ведущего</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="pass" name="pass" type="password" class="validate">
+            <label for="pass">Пароль</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s10">
+            <select id="id">
+                <option value="" disabled selected>Выбери вебинар</option>
+            </select>
+            <label>Вебинар</label>
+        </div>
+        <div class="input-field col s2">
+            <div class="switch">
+                <label>
+                    Запись вебинара Выкл
+                    <input type="checkbox" id="record" name="record">
+                    <span class="lever"></span>
+                    Вкл
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <button class="btn waves-effect waves-light" id="btnCreate" name="action">Создать вебинар
+                <i class="mdi-content-send right"></i>
+            </button>
+        </div>
+        <div id="btnEnddiv" class="col s4">
+            <button class="btn waves-effect waves-light" id="btnEnd">Завершить вебинар
+                <i class="mdi-content-send right"></i>
+            </button>
+        </div>
+        <div id="newMeeturl" class="col s4">
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnCreate").on(
+                "click", function (e) {
+                    $.get("parusapi/admin.jsp",
+                            {
+                                action:"create",
+                                username: $("#username")[0].value,
+                                pass: $("#pass")[0].value,
+                                name: $("#id")[0].selectedOptions[0].textContent,
+                                id: $("#id")[0].value,
+                                record: $("#record")[0].checked
+                            },
+                            function (data) {
+                                if (data.status == "ok") {
+                                    $("#newMeeturl").html('<a href="' + data.url + '" target="_blank">присоединиться</a>');
+                                }
+                            }
+                    );
+                }
+        );
+        $("#btnEnd").on(
+                "click", function (e) {
+                    $.get("parusapi/admin.jsp",
+                            {
+                                action:"end",
+                                pass: $("#pass")[0].value,
+                                id: $("#id")[0].value
+                            },
+                            function (data) {
+                                if (data.status == "ok") {
+                                    $("#newMeeturl").html('');
+                                }
+                            }
+                    );
+                }
+        );
+        $.get(
+                "index.html",
+                function (data) {
+                    var titles = $(data).find(".card-title");
+                    $(data).find(".meetingRef").each(
+                            function (index) {
+                                $("#id").append($("<option></option>").attr("value",$( this ).attr("id")).text(titles[index].textContent));
+                            }
+                    );
+                    $('select').material_select();
+                }
+        )
+    });
+</script>
+</body>
+</html>
